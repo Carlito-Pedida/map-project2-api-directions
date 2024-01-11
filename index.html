@@ -36,6 +36,13 @@
     </style>
   </head>
   <body>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css"
+      type="text/css"
+    />
+
     <div id="map">HELLO!</div>
     <div id="instructions"></div>
     <script>
@@ -48,11 +55,11 @@
         zoom: 12
       });
       // set the bounds of the map
-      const bounds = [
-        [-123.069003, 45.395273],
-        [-122.303707, 45.612333]
-      ];
-      map.setMaxBounds(bounds);
+      //   const bounds = [
+      //     [-123.069003, 45.395273],
+      //     [-122.303707, 45.612333]
+      //   ];
+      //   map.setMaxBounds(bounds);
 
       // an arbitrary start will always be the same
       // only the end or destination will change
@@ -193,6 +200,15 @@
           getRoute(coords);
         });
       });
+
+      // Add the control to the map.
+      map.addControl(
+        new MapboxGeocoder({
+          accessToken: mapboxgl.accessToken,
+          mapboxgl: mapboxgl
+        })
+      );
+      map.addControl(new mapboxgl.NavigationControl());
     </script>
   </body>
 </html>
